@@ -19,8 +19,11 @@ login_manager.init_app(app)
 @app.route('/')
 def home():
     rooms = []
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         rooms = get_rooms_for_user(current_user.username)
+    else:
+        return redirect(url_for('login'))
+
     return render_template("index.html", rooms=rooms)
 
 
@@ -172,4 +175,4 @@ def load_user(username):
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, host='0.0.0.0', debug=True)
