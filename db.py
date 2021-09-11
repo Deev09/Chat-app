@@ -4,8 +4,9 @@ from bson import ObjectId
 from pymongo import MongoClient, DESCENDING
 from werkzeug.security import generate_password_hash
 from user import User
+from secret import MONGO_LOGIN
 
-client = MongoClient("mongodb+srv://Deev:wGnclbwGyRIuVxhE@cluster0.irw6z.mongodb.net/ChatDB?retryWrites=true&w=majority&ssl=true&ssl_cert_reqs=CERT_NONE")
+client = MongoClient(MONGO_LOGIN)
 chat_db = client.get_database("ChatDB")
 users_collection=chat_db.get_collection("users")
 rooms_collection = chat_db.get_collection("rooms")
